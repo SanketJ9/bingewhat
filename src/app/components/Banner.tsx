@@ -1,0 +1,93 @@
+// src/components/Banner.tsx
+
+'use client';
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Button from "./ui/Button";
+import Slider from "./ui/Slider";
+import { getMovieGenreNames } from "../lib/tmdbs";
+
+interface Movie {
+  id: number;
+  title?: string;
+  name?: string;
+  backdrop_path: string;
+  poster_path: string;
+  overview: string;
+  genre_ids: number[];
+}
+
+interface BannerProps {
+  apiUrl: string;
+}
+
+export default function Banner({ apiUrl }: BannerProps) {
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [activeMovie, setActiveMovie] = useState<Movie | null>(null);
+
+  // const API_URL = "https://api.themoviedb.org/3/trending/movie/week?language=en-US";
+
+
+  async function fetchTrendingMovies(): Promise<Movie[]> {
+    const res = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, // Replace with your actual key
+      },
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch movies");
+
+    const data = await res.json();
+    const shuffled = [...data.results].sort(() => 0.8 - Math.random());
+    return shuffled.slice(0, 8);
+  }
+
+  useEffect(() => {
+    fetchTrendingMovies().then((res) => {
+      setMovies(res);
+      setActiveMovie(res[0]); // default to first
+    });
+  }, []);
+
+  return (
+    <>
+      {activeMovie && (
+        <div className="relative mx-auto sm:h-[75vh] w-full text-white overflow-hidden">
+          <Image
+            src={`https://image.tmdb.org/t/p/original${activeMovie.backdrop_path}`}
+            alt={activeMovie.title || activeMovie.name || "Untitled"}
+            fill
+            className="object-cover"
+            priority
+          />
+
+          <div className="relative flex flex-col justify-center h-[70vh] container max-w-7xl mx-auto px-4">
+            <div className="md:left-12 max-w-[85%] sm:max-w-[40%]">
+              <h1 className="text-3xl md:text-4xl font-bold drop-shadow-lg">{activeMovie.title || activeMovie.name}</h1>
+              <p className="mt-2 mb-2 text-sm md:text-base text-white line-clamp-4 drop-shadow-sm">
+                {activeMovie.overview}
+              </p>
+              {activeMovie.genre_ids && (
+                <p className="text-sm md:text-md mb-6 mt-4 font-bold text-green-50 ">
+                  {getMovieGenreNames(activeMovie.genre_ids).join(", ")}
+                </p>
+              )}
+              <Button>Watch Now ▶</Button>
+            </div>
+            <div className="banner-slider absolute right-0 bottom-0 z-40 w-[100%] sm:w-[50%] ">
+              <Slider movies={movies} onActiveChange={setActiveMovie} />
+            </div>
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#051f29] via-transparent to-[#051f29]/20" />
+
+
+        </div>
+      )}
+
+
+    </>
+  );
+}
