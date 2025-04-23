@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Banner from "../components/Banner";
 import CommonSlider from "../components/ui/commonSlider";
 

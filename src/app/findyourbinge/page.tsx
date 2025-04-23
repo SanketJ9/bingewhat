@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { movieGenres } from '../Constants/genres';
-import { productionCompanies } from '../Constants/company';
+// import { productionCompanies } from '../Constants/company';
 import Image from 'next/image';
 
 type Media = {
@@ -24,10 +24,10 @@ export default function FindYourBinge() {
   const [error , setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const values = Array.from(e.target.selectedOptions, (option) => Number(option.value));
-    setSelectedGenres(values);
-  };
+  // const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const values = Array.from(e.target.selectedOptions, (option) => Number(option.value));
+  //   setSelectedGenres(values);
+  // };
 
   // const handleCompanyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   //   const values = Array.from(e.target.selectedOptions, (option) => Number(option.value));
