@@ -54,7 +54,7 @@ export default function Banner({ apiUrl }: BannerProps) {
   return (
     <>
       {activeMovie && (
-        <div className="relative mx-auto sm:h-[75vh] w-full text-white overflow-hidden">
+        <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-hidden">
           <Image
             src={`https://image.tmdb.org/t/p/original${activeMovie.backdrop_path}`}
             alt={activeMovie.title || activeMovie.name || "Untitled"}
@@ -63,7 +63,7 @@ export default function Banner({ apiUrl }: BannerProps) {
             priority
           />
 
-          <div className="relative flex flex-col justify-center h-[70vh] container max-w-7xl mx-auto px-4">
+          <div className="relative flex flex-col justify-center h-full container max-w-7xl mx-auto px-4">
             <div className="md:left-12 max-w-[85%] sm:max-w-[40%]">
               <h1 className="text-3xl md:text-4xl font-bold drop-shadow-lg">{activeMovie.title || activeMovie.name}</h1>
               <p className="mt-2 mb-2 text-sm md:text-base text-white line-clamp-4 drop-shadow-sm">

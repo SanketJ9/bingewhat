@@ -28,23 +28,19 @@ export default async function MoviesPage() {
       <Banner apiUrl="https://api.themoviedb.org/3/trending/movie/week?language=en-US"/>
       
       <div className="container max-w-7xl mx-auto flex flex-col gap-2 mt-10">
-          <h3 className="text-4xl font-bold">Cinema's Finest</h3>
-          <CommonSlider apiUrl="https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1" />
+          <CommonSlider heading="Cinema's Finest" apiUrl="https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1" />
       </div>
 
       <div className="container max-w-7xl mx-auto flex flex-col gap-2 mt-4">
-          <h3 className="text-4xl font-bold">Fan Favouites</h3>
-          <CommonSlider apiUrl="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1" />
+          <CommonSlider heading="Fan Favouites" apiUrl="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1" />
       </div>
 
       <div className="container max-w-7xl mx-auto flex flex-col gap-2 mt-4">
-          <h3 className="text-4xl font-bold">In Nearest Theatre</h3>
-          <CommonSlider apiUrl="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1" />
+          <CommonSlider heading="In Nearest Theatre" apiUrl="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1" />
       </div>
 
       <div className="container max-w-7xl mx-auto flex flex-col gap-2 mt-4">
-          <h3 className="text-4xl font-bold">Upcoming Movies</h3>
-          <CommonSlider apiUrl="https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1" />
+          <CommonSlider heading="Upcoming Movies" apiUrl="https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1" />
       </div>
     </>
   );

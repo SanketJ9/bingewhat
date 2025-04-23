@@ -6,16 +6,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react"; 
 import { usePathname } from "next/navigation";
 
-import { Honk } from 'next/font/google'
-
-const honk = Honk({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-})
-
 const navLinks = [
-  { name: "Find Your Binge", href: "/findyourbinge" },
+  { name: "Find Your Binge", href: "/findyourbinge"},
   { name: "Movies", href: "/movies" },
   { name: "TV", href: "/tv" },
   { name: "Watchlist", href: "/watchlist" },
@@ -47,7 +39,7 @@ export default function Header() {
                   key={link.name}
                   onClick={() => setIsOpen(false)}
                   href={link.href}
-                  className={`text-white text-lg font-bold hover:text-gray-300 py-1 px-2 rounded-sm ${
+                  className={`text-white text-lg font-bold hover:text-gray-300 py-1 px-2  ${
                     // pathname === link.href ? "bg-[#0b3546] text-[#3cd293] border-[#3cd293]" : ""
                     pathname === link.href ? "border-b-2 border-b-[#3cd293]" : ""
                     }`}

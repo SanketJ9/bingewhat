@@ -21,10 +21,11 @@ interface MediaItem {
 }
 
 interface CommonSliderProps {
+  heading: string;
   apiUrl: string;
 }
 
-export default function CommonSlider({ apiUrl }: CommonSliderProps) {
+export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
 
   useEffect(() => {
@@ -48,38 +49,47 @@ export default function CommonSlider({ apiUrl }: CommonSliderProps) {
   }, [apiUrl]);
 
   return (
-    <div className="w-full px-4 py-6">
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={12}
-        slidesPerView={3.5}
-        loop
-        navigation
-        breakpoints={{
-          640: { slidesPerView: 4 },
-          1024: { slidesPerView: 6.5 },
-        }}
-      >
-        {mediaItems.map((item) => (
-          <SwiperSlide key={item.id}>
-            <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer">
-              <Image
-                src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
-                alt={item.title || item.name || 'Untitled'}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className='absolute top-2 right-2 bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
-                {item.vote_average.toString().slice(0, 3)}
-              </div>
-                <div className="absolute bottom-0 visible sm:hidden left-0 z-20 w-full p-4 bg-gradient-to-t from-[#0b3546] to-transparent text-white">
-                    <h3 className="text-sm font-bold">{item.title || item.name}</h3>
-                </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <>
+        <h3 className="text-2xl font-bold ">{heading}</h3>
+        <div className="common-swiper w-full py-2 lg:py-3 xl:px-4">
+            <Swiper
+                modules={[Navigation]}
+                spaceBetween={6}
+                slidesPerView={2.5}
+                loop
+                navigation
+                breakpoints={{
+                640: { 
+                    spaceBetween: 10,
+                    slidesPerView: 4.5 
+                },
+                1024: { 
+                    spaceBetween: 12,
+                    slidesPerView: 6.5 
+                },
+                }}
+            >
+                {mediaItems.map((item) => (
+                <SwiperSlide key={item.id}>
+                    <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
+                    <Image
+                        src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
+                        alt={item.title || item.name || 'Untitled'}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    <div className='absolute top-2 right-2 text-sm lg:text-lg bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
+                        {item.vote_average.toString().slice(0, 3)}
+                    </div>
+                        <div className="absolute bottom-0 hidden left-0 z-20 w-full p-4 bg-gradient-to-t from-[#0b3546] to-transparent text-white">
+                            <h3 className="text-sm font-bold">{item.title || item.name}</h3>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
+    </>
   );
 }

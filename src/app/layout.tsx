@@ -3,18 +3,14 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import { Gabarito, Honk, Nunito } from 'next/font/google'
+import { Gabarito, Nunito } from 'next/font/google'
 
 const gabarito = Gabarito({
   subsets: ['latin'],
   weight: ['400', '700', '900'], // Adjust weights as needed
   display: 'swap',
 })
-const honk = Honk({
-  subsets: ['latin'],
-  weight: ['400'], // Honk has only one weight/style
-  display: 'swap',
-})
+
 const nunito = Nunito({
   subsets: ['latin'],
   weight: ['200', '400', '700', '900', '1000'], // Customize as needed
@@ -35,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${gabarito.className} ${nunito.className}`}>
+      <body className={`${gabarito.className} ${nunito.className} bg-[#051f29] text-[#3cd293]`}>
         <Header />
         <main className="relative mx-auto ">{children}</main>
         <Footer />

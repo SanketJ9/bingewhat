@@ -20,8 +20,8 @@ export default function FindYourBinge() {
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   // const [selectedCompanies, setSelectedCompanies] = useState<number[]>([]);
   const [includeAdult, setIncludeAdult] = useState(false);
-  const [result, setResult] = useState<Media | null>(null);
-  const [error , setError] = useState<unknown | null>(null);
+  const [result, setResult] = useState<Media[] | null>(null);
+  const [error , setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -74,7 +74,7 @@ export default function FindYourBinge() {
       // const random = data.results[Math.floor(Math.random() * data.results.length)];
       setResult(data.results);
     } catch (err) {
-      setError(err.toString());
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -86,10 +86,10 @@ export default function FindYourBinge() {
 
         <div className='bg-[#051f29] text-white p-6 rounded-2xl shadow-xl max-w-7xl mx-auto mt-20'>
           
-            <h2 className="text-4xl font-bold mb-6 text-center text-[#3cd293]">Find Your Binge</h2>
+            <h2 className="text-4xl font-bold text-left md:text-center mb-6 text-center text-[#3cd293]">Find Your Binge</h2>
 
             {/* Media Type Toggle */}
-            <div className="flex justify-center gap-4 mb-6">
+            <div className="flex self-start md:self-center gap-4 mb-4 md:mb-6 ">
               {['movie', 'tv'].map((type) => (
                 <button
                   key={type}
@@ -180,11 +180,11 @@ export default function FindYourBinge() {
               {error && <p className="text-[#3cd293]mt-4">{error}</p>}
             </div>
 
-            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-26'>
+            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-16'>
               {result && (
                 result.map((item: Media) => {
                   return (
-                    <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer">
+                    <div key={item.id} className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
                       <Image
                         src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
                         alt={item.title || item.name || 'Untitled'}

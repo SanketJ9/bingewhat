@@ -1,6 +1,6 @@
 // src/components/ui/Slider.tsx
 
-'use client';
+// 'use client';
 
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -34,13 +34,14 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
   }, [activeIndex, movies, onActiveChange]);
 
   return (
-    <div className="w-full px-4 py-6">
+    <div className="common-swiper banner-swiper w-full px-4 py-6">
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
+        spaceBetween={12}
         slidesPerView={2.5}
         loop
         navigation
+        
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
         breakpoints={{
