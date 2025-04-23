@@ -63,9 +63,9 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <nav className="md:hidden bg-background absolute top-0 left-0 h-[100vh] w-[100vw] z-60 b p-4 flex flex-col gap-6">
-          <div className="h-16">
-            <Link href="/" className="pb-4"  onClick={() => setIsOpen(!isOpen)}>
+        <nav className="md:hidden bg-background absolute top-0 left-0 h-[100vh] w-[100vw] z-60 b px-4 flex flex-col gap-6">
+          <div className="h-16 flex items-center">
+            <Link href="/" className=""  onClick={() => setIsOpen(!isOpen)}>
             <Image
               src="/logo.png"    
               alt="Logo"
