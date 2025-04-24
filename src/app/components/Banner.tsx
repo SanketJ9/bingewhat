@@ -55,7 +55,7 @@ export default function Banner({ apiUrl }: BannerProps) {
   return (
     <>
       {activeMovie && (
-        <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-hidden">
+        <div className="relative mx-auto h-[100svh] sm:h-[75vh] max-h-[1080px] w-full text-white overflow-hidden">
           <Image
             src={`https://image.tmdb.org/t/p/original${activeMovie.backdrop_path}`}
             alt={activeMovie.title || activeMovie.name || "Untitled"}
