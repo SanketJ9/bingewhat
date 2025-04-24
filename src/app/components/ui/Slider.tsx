@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import Link from 'next/link';
 import Image from 'next/image';
 
 interface Movie {
@@ -51,6 +52,7 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
       >
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
+            <Link href={`/${movie.id}`}>
             <div className="relative rounded-lg overflow-hidden shadow-md">
             <div className="relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
                 <Image
@@ -65,6 +67,7 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
                 <h2 className="text-sm sm:text-sm font-bold">{movie.title}</h2>
               </div> */}
             </div>
+            </Link> 
           </SwiperSlide>
         ))}
       </Swiper>

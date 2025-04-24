@@ -3,6 +3,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import Button from "./ui/Button";
 import Slider from "./ui/Slider";
@@ -63,7 +64,7 @@ export default function Banner({ apiUrl }: BannerProps) {
             priority
           />
 
-          <div className="relative flex flex-col justify-center h-full container max-w-7xl mx-auto px-4">
+          <div className="relative flex flex-col justify-center h-full container max-w-7xl mx-auto px-4 z-10">
             <div className="md:left-12 max-w-[85%] sm:max-w-[40%]">
               <h1 className="text-3xl md:text-4xl font-bold drop-shadow-lg">{activeMovie.title || activeMovie.name}</h1>
               <p className="mt-2 mb-2 text-sm md:text-base text-white line-clamp-4 drop-shadow-sm">
@@ -74,7 +75,9 @@ export default function Banner({ apiUrl }: BannerProps) {
                   {getMovieGenreNames(activeMovie.genre_ids).join(", ")}
                 </p>
               )}
-              <Button>Watch Now ▶</Button>
+              <Link href={`/${activeMovie.id}`}>
+                <Button>Watch Now ▶</Button>
+              </Link>
             </div>
             <div className="banner-slider absolute right-0 bottom-0 z-40 w-[100%] sm:w-[50%] ">
               <Slider movies={movies} onActiveChange={setActiveMovie} />

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import Link from 'next/link';
 import { Navigation } from 'swiper/modules';
 import Image from 'next/image';
 
@@ -71,6 +72,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
             >
                 {mediaItems.map((item) => (
                 <SwiperSlide key={item.id}>
+                    <Link href={`/${item.id}`}>
                     <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
                     <Image
                         src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
@@ -86,6 +88,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
                             <h3 className="text-sm font-bold">{item.title || item.name}</h3>
                         </div>
                     </div>
+                    </Link>
                 </SwiperSlide>
                 ))}
             </Swiper>
