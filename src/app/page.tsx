@@ -23,7 +23,7 @@ export default function Home() {
             </div>
             <div className="w-[100%]  py-6 px-4 md:w-[60%] ">
               <h2 className="text-xl text-center md:text-left font-bold text-[#3cd293] ">Find Your Binge Before Your Food Gets Cold</h2>
-              <p className="text-sm text-center md:text-left text-green-200 mt-2 mb-4">No more 45-minutes scroll sessions. get straight to the good stuff while your fries are still crispy. Let us help you pick your binge faster than you can say “What do you wanna watch?”</p>
+              <p className="text-sm text-center md:text-left text-green-200 mt-2 mb-4">No more 45-minute scroll sessions. get straight to the good stuff while your fries are still crispy. Let us help you pick your binge faster than you can say “What do you wanna watch?”</p>
               <div className="text-center mt-2 md:text-left">
                 <Link href="/findyourbinge">
                   <Button className="font-bold">Find Yo Binge !</Button>
