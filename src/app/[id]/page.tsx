@@ -1,12 +1,18 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
-interface MediaDetailsProps {
+// interface MediaDetailsProps {
+//     params: { id: string };
+//     searchParams: { type?: string };
+//   }
+  
+  export default async function MediaDetails({
+    params,
+    searchParams,
+  }: {
     params: { id: string };
     searchParams: { type?: string };
-  }
-  
-  export default async function MediaDetails({ params, searchParams }: MediaDetailsProps) {
+  }) {
     const id = params.id;
     const mediaType = searchParams.type || 'movie';
     

@@ -48,9 +48,9 @@ export default function Banner({ apiUrl }: BannerProps) {
   useEffect(() => {
     fetchTrendingMovies().then((res) => {
       setMovies(res);
-      setActiveMovie(res[0]); // Set the first movie as active
+      setActiveMovie(res[0]); 
     });
-  }, [fetchTrendingMovies]);
+  }, [apiUrl]);
 
   return (
     <>
