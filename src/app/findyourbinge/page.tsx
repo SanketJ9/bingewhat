@@ -87,7 +87,7 @@ export default function FindYourBinge() {
 
         <div className='bg-[#051f29] text-white p-6 rounded-2xl shadow-xl max-w-7xl mx-auto mt-20'>
           
-            <h2 className="text-4xl font-bold text-left md:text-center mb-6 text-center text-[#3cd293]">Find Your Binge</h2>
+            <h2 className="text-4xl font-bold text-left md:text-center mb-6  text-[#3cd293]">Find Your Binge</h2>
 
             {/* Media Type Toggle */}
             <div className="flex self-start md:self-center gap-4 mb-4 md:mb-6 ">
@@ -130,32 +130,6 @@ export default function FindYourBinge() {
                 </div>
             </div>
 
-            {/* Company Dropdown */}
-            {/* <div className="mb-6">
-              <h4 className='text-xl text-gray-50 font-bold pb-2 '>Networks</h4>
-
-              <div className='flex flex-wrap gap-2'>
-                {productionCompanies.map((company) => {
-                  const selected = selectedCompanies.includes(company.id);
-                  return (
-                    <button
-                      key={company.id}
-                      onClick={() =>
-                        setSelectedCompanies((prev) =>
-                          selected ? prev.filter((id) => id !== company.id) : [...prev, company.id]
-                        )
-                      }
-                      className={`px-4 py-2 text-sm rounded font-semibold ${
-                        selected ? 'bg-[#3cd293] text-[#0b3546]' : 'bg-[#0b3546] text-[#3cd293]'
-                      }`}
-                    >
-                      {company.name}
-                    </button>
-                  );
-                  })}
-                </div>
-                  {selectedCompanies}
-            </div> */}
 
             {/* Adult Content Toggle */}
             <div className="flex items-center mb-6">

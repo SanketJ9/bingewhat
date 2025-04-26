@@ -48,10 +48,10 @@ export default async function MediaDetails(props: {params: { id: string }; searc
                         </h1>
                         {data.tagline && (
                             <p className="mt-1 text-md md:text-base text-white line-clamp-4 drop-shadow-sm">
-                                "{data.tagline}"
+                                {data.tagline}
                             </p>
                         )}
-                        <p className='mt-2 '></p>
+                        <p className='mt-2'></p>
                         <p className="mt-4 m text-sm md:text-base text-white text-shadow-lg">
                             {data.overview}
                         </p>

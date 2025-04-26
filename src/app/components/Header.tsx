@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; 
 import { usePathname } from "next/navigation";
 import { IoSearch } from "react-icons/io5";
 import { RiMenu2Fill } from "react-icons/ri";
