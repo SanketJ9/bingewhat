@@ -1,10 +1,14 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
-
-export default async function MediaDetails(props: {params: { id: string }; searchParams: { type?: string };}){
-  const id = await props.params.id;
-  const mediaType = await props.searchParams.type || 'movie';
+interface MediaDetailsProps {
+    params: { id: string };
+    searchParams: { type?: string };
+  }
+  
+  export default async function MediaDetails({ params, searchParams }: MediaDetailsProps) {
+    const id = params.id;
+    const mediaType = searchParams.type || 'movie';
     
   const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
     headers: {
