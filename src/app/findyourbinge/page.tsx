@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { movieGenres } from '../Constants/genres';
 // import { productionCompanies } from '../Constants/company';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Media = {
   id: number;
@@ -185,19 +186,21 @@ export default function FindYourBinge() {
                 result.map((item: Media) => {
                   return (
                     <div key={item.id} className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
-                      <Image
-                        src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
-                        alt={item.title || item.name || 'Untitled'}
-                        fill
-                        className="object-cover"
-                        priority
-                      />
-                      <div className='absolute top-2 right-2 bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
-                        {item.vote_average.toString().slice(0, 3)}
-                      </div>
+                      <Link href={`/${item.id}`}>
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
+                          alt={item.title || item.name || 'Untitled'}
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                        <div className='absolute top-2 right-2 bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
+                          {item.vote_average.toString().slice(0, 3)}
+                        </div>
                         <div className="absolute bottom-0 visible sm:hidden left-0 z-20 w-full p-4 bg-gradient-to-t from-[#0b3546] to-transparent text-white">
                             <h3 className="text-sm font-bold">{item.title || item.name}</h3>
                         </div>
+                      </Link>
                     </div>
                   );
                 })

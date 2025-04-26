@@ -81,7 +81,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
                             className="object-cover"
                             priority
                         />
-                        <div className='absolute top-2 right-2 text-sm lg:text-lg bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
+                        <div className='absolute top-2 right-2 text-sm lg:text-md bg-[#0b3546] bg-opacity-20 text-[#3cd293] py-1 px-2 rounded-lg z-50'>
                             {item.vote_average.toString().slice(0, 3)}
                         </div>
                         <div className="absolute bottom-0 hidden left-0 z-20 w-full p-4 bg-gradient-to-t from-[#0b3546] to-transparent text-white">

@@ -22,7 +22,7 @@ interface Movie {
 
 interface SliderProps {
   movies: Movie[];
-  onActiveChange?: (movie: Movie) => void; // 👈 New prop
+  onActiveChange?: (movie: Movie) => void; 
 }
 
 export default function Slider({ movies, onActiveChange }: SliderProps) {
@@ -54,7 +54,7 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
           <SwiperSlide key={movie.id}>
             <Link href={`/${movie.id}`}>
             <div className="relative rounded-lg overflow-hidden shadow-md">
-            <div className="relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
+            <div className="swiper-image relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
                 <Image
                     src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
                     alt={movie.title || movie.name || 'Untitled'}

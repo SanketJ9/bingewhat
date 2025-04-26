@@ -33,17 +33,13 @@ body {
 
 
 .banner-swiper .swiper .swiper-slide{
-  border : 2.5px solid #0b3546;
+  border : 2px solid #0b3546;
   border-radius: 10px;
 }
 
 .banner-swiper .swiper .swiper-slide-active{
-  border : 2.5px solid #3cd293;
+  border : 2px solid #3cd293;
   border-radius: 10px;
-}
-
-.banner-swiper .swiper-button-next{
-  right: -2% !important;
 }
 
 .common-swiper .swiper-button-next,
