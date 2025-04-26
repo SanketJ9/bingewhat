@@ -14,6 +14,8 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="bg-[#0b3546] text-[#3cd293] py-8 mt-16 border-t-2 border-[#3cd293]">
+            
+
         <div className="container max-w-7xl mx-auto px-4 flex flex-col justify-around mb-8">
             <div>
             <Link href="/" className="" >
