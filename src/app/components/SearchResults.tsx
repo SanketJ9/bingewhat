@@ -7,11 +7,6 @@ import { FaStar } from "react-icons/fa6";
 import { useSearch } from "../context/searchContext";
 
 
-
-interface SearchResultsProps {
-    searchParams: string;
-}
-
 interface Movie {
     id: number;
     title?: string;
@@ -26,7 +21,7 @@ interface Movie {
 export default function SearchResults() {
     
     const { query } = useSearch();
-    const [result, setResult] = useState<any[]>([]);
+    const [result, setResult] = useState([]);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [isSearchOpen , setIsSearchOpen] = useState(false);
