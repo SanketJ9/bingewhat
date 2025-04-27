@@ -28,7 +28,7 @@ export default function Header() {
       <div className="container max-w-7xl mx-auto h-16 px-4 sm:px-4 lg:px-4 flex justify-between items-center">
         <div className="flex items-center gap-4 lg:gap-12 w-full">
           {/* Logo */}
-          <Link href="/" className="" onClick={() => setIsOpen(!isOpen)}>
+          <Link href="/" className="" >
             <div className="relative w-[160px] md:w-[180px] lg:w-[200px] h-[40px] md:h-[45px] lg:h-[50px]">
               <Image
                 src="/logo.png"    
