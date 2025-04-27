@@ -56,7 +56,7 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
             <div className="relative rounded-lg overflow-hidden shadow-md">
             <div className="swiper-image relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
                 <Image
-                    src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
+                    src={movie.poster_path ?`https://image.tmdb.org/t/p/w780${movie.poster_path}` : "/no-poster.jpg"}
                     alt={movie.title || movie.name || 'Untitled'}
                     fill
                     className="object-cover"

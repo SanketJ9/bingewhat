@@ -4,6 +4,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import { Gabarito, Nunito } from 'next/font/google'
+import SearchResults from "./components/SearchResults";
+
+import SearchProvider from "./context/searchContext"
 
 const gabarito = Gabarito({
   subsets: ['latin'],
@@ -32,9 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${gabarito.className} ${nunito.className} bg-[#051f29] text-[#3cd293]`}>
-        <Header />
-        <main className="relative mx-auto ">{children}</main>
-        <Footer />
+        <SearchProvider>
+          <Header />
+          <main className="relative mx-auto">{children}</main>
+          <SearchResults />
+          <Footer />
+        </SearchProvider>
       </body>
     </html>
   );

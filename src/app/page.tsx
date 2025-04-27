@@ -49,6 +49,7 @@ export default function Home() {
       <div className="container max-w-7xl mx-auto flex flex-col gap-2 px-4 mt-4">
           <CommonSlider heading="Best of TV" apiUrl="https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1" />
       </div>
+
     </>
   );
 }

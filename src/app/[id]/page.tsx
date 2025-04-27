@@ -2,14 +2,14 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 interface PageProps {
-    params: { id: string };
-    searchParams: { type?: string };
-  }
-  
-  export default async function Page({ params, searchParams }: PageProps) {
-    const id = params.id;
-    const mediaType = searchParams.type || 'movie';
-  
+  params: { id: string };
+  searchParams: { type?: string };
+}
+
+export default async function Page({ params, searchParams }: PageProps) {
+  const id = params.id;
+  const mediaType = searchParams.type || 'movie';
+
     
   const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
     headers: {
@@ -27,7 +27,7 @@ interface PageProps {
 
   return (
     <>
-        <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-hidden ">
+        <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-y-auto ">
             <Image
                 src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
                 alt={data.title || data.name || "Untitled"}
@@ -37,8 +37,8 @@ interface PageProps {
             />
 
             <div className="relative flex flex-col justify-end h-full container max-w-7xl mx-auto px-4 z-10">
-                <div className="flex flex-row gap-4 md:gap-8">
-                    <div className="relative aspect-[2/3] w-[200px] mb-8 rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] ">
+                <div className="flex flex-col  md:flex-row gap-4 md:gap-8">
+                    <div className="relative aspect-[2/3] w-[200px]  rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] ">
                         <Image
                             src={`https://image.tmdb.org/t/p/w780${data.poster_path}`}
                             alt={data.title || data.name || 'Untitled'}
@@ -47,8 +47,8 @@ interface PageProps {
                             priority
                         />
                     </div>
-                    <div className='max-w-[85%] sm:max-w-[480px]'>
-                        <h1 className="text-3xl md:text-4xl font-bold drop-shadow-lg ">
+                    <div className='max-w-[100%] sm:max-w-[480]px]'>
+                        <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg ">
                             {data.title || data.name}
                         </h1>
                         {data.tagline && (
@@ -57,7 +57,7 @@ interface PageProps {
                             </p>
                         )}
                         <p className='mt-2'></p>
-                        <p className="mt-4 m text-sm md:text-base text-white text-shadow-lg">
+                        <p className="mt-4 m text-sm md:text-base text-white text-justify text-shadow-lg">
                             {data.overview}
                         </p>
                         {data.genres && (
