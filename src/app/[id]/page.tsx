@@ -3,14 +3,14 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
-// Next.js automatically infers types for `params` and `searchParams`
-export default async function Page({ params, searchParams }: { params: { id: number }, searchParams: { type: string } }) {
+// Updated typing for params.id as string
+export default async function Page({ params, searchParams }: { params: { id: string }, searchParams: { type: string } }) {
   const { id } = params;
   const mediaType = searchParams.type || 'movie';
 
   const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
     headers: {
-      Authorization: `Bearer YOUR_API_KEY`, // Replace with actual API key
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, // Replace with actual API key
     },
     next: { revalidate: 60 }, // optional: ISR
   });
