@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 // Next.js automatically infers types for `params` and `searchParams`
-export default async function Page({ params, searchParams }: { params: { id: string }, searchParams: { type?: string } }) {
+export default async function Page({ params, searchParams }: { params: { id: number }, searchParams: { type: string } }) {
   const { id } = params;
   const mediaType = searchParams.type || 'movie';
 
