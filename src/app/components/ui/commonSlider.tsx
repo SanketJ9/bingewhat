@@ -9,6 +9,9 @@ import 'swiper/css/navigation';
 import Link from 'next/link';
 import { Navigation } from 'swiper/modules';
 import Image from 'next/image';
+import { useLoading } from "../../context/loadingContext";
+import { start } from 'repl';
+
 
 interface MediaItem {
   id: number;
@@ -29,9 +32,12 @@ interface CommonSliderProps {
 export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
 
+  const { startLoading, stopLoading } = useLoading();
+
   useEffect(() => {
     async function fetchData() {
       try {
+        startLoading();
         const res = await fetch(apiUrl, {
           headers: {
             Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, // replace with env var
@@ -43,6 +49,8 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
         setMediaItems(data.results || []);
       } catch (error) {
         console.error(error);
+      } finally {
+        stopLoading();
       }
     }
 

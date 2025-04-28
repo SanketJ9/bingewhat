@@ -1,5 +1,3 @@
-// src/components/Banner.tsx
-
 'use client';
 
 import { useEffect, useState } from "react";
@@ -8,6 +6,9 @@ import Image from "next/image";
 import Button from "./ui/Button";
 import Slider from "./ui/Slider";
 import { getMovieGenreNames } from "../lib/tmdbs";
+
+import { useLoading } from "../context/loadingContext";
+
 
 interface Movie {
   id: number;
@@ -42,10 +43,13 @@ async function fetchTrendingMovies(apiUrl: string): Promise<Movie[]> {
 export default function Banner({ apiUrl }: BannerProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [activeMovie, setActiveMovie] = useState<Movie | null>(null);
+  const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
-    fetchTrendingMovies(apiUrl) // ✅ Pass apiUrl properly
+    startLoading();
+    fetchTrendingMovies(apiUrl) 
       .then((res) => {
+        stopLoading();
         setMovies(res);
         setActiveMovie(res[0]);
       })
