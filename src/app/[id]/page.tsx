@@ -15,16 +15,14 @@ interface MediaDetails {
 type Params = Promise<{ id: string }>;
 
 export default async function Page({
-  params,
-  searchParams,
+  params
 }: {
   params: Params;
-  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const { id } = await params; // 👈 You MUST await params now
-  const mediaType =  typeof searchParams?.type === 'string' ? searchParams.type : 'movie';
+//   const mediaType =  typeof searchParams?.type === 'string' ? searchParams.type : 'movie';
 
-  const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}`, {
     headers: {
       Authorization: `Bearer YOUR_API_KEY`,
     },
