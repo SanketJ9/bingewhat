@@ -1,18 +1,34 @@
-// src/app/[id]/page.tsx
-
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
-// Updated typing for params.id as string
-export default async function Page({ params, searchParams }: { params: { id: string }, searchParams: { type: string } }) {
-  const { id } = params;
+interface MediaDetails {
+    backdrop_path: string;
+    poster_path: string;
+    title?: string;
+    name?: string;
+    tagline?: string;
+    overview: string;
+    genres: { id: number; name: string }[];
+    vote_average: number;
+  }
 
-  const mediaType = searchParams.type || 'movie';
+type Params = Promise<{ id: string }>;
+
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const { id } = await params; // 👈 You MUST await params now
+  const mediaType =  typeof searchParams?.type === 'string' ? searchParams.type : 'movie';
 
   const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, // Replace with actual API key
-    }
+      Authorization: `Bearer YOUR_API_KEY`,
+    },
+    cache: 'no-store',
   });
 
   if (!res.ok) {
@@ -20,7 +36,8 @@ export default async function Page({ params, searchParams }: { params: { id: str
     throw new Error('Failed to fetch media details');
   }
 
-  const data = await res.json();
+  const data : MediaDetails = await res.json();
+
 
   return (
     <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-y-auto ">
