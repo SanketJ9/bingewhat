@@ -160,7 +160,7 @@ export default function FindYourBinge() {
                 result.map((item: Media) => {
                   return (
                     <div key={item.id} className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
-                      <Link href={`/${item.id}`}>
+                      <Link href={`/${item.id}?type=${item.title ? 'movie' : 'tv'}`}>
                         <Image
                           src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
                           alt={item.title || item.name || 'Untitled'}

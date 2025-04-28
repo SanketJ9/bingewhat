@@ -1,79 +1,132 @@
-// src/app/[id]/page.tsx
+"use client";
 
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { IoSearch } from "react-icons/io5";
+import { RiMenu2Fill } from "react-icons/ri";
+import { RiCloseLine } from "react-icons/ri";
+import { useSearch } from "../context/searchContext";
 
-// Define PageProps interface with correct types
-interface PageProps {
-  params: { id: string }; // id should be a string as route params are typically strings
-  searchParams: { type?: string }; // searchParams should be optional
-}
+const navLinks = [
+  { name: "Find Your Binge", href: "/findyourbinge"},
+  { name: "Movies", href: "/movies" },
+  { name: "TV", href: "/tv" },
+  { name: "Watchlist", href: "/watchlist" },
+];
 
-export default async function Page({ params, searchParams }: PageProps) {
-  const { id } = params; // `id` is now correctly typed as string
-  const mediaType = searchParams?.type || 'movie'; // fallback to 'movie' if type is not provided
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname();
 
-  const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, 
-    },
-    next: { revalidate: 60 }, // optional: ISR
-  });
-
-  if (!res.ok) {
-    if (res.status === 404) notFound();
-    throw new Error('Failed to fetch media details');
-  }
-
-  const data = await res.json();
+  const { setQuery } = useSearch();
 
   return (
-    <div className="relative mx-auto h-[100svh] sm:h-[75vh] w-full text-white overflow-y-auto ">
-      <Image
-        src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-        alt={data.title || data.name || "Untitled"}
-        fill
-        className="object-cover"
-        priority
-      />
-
-      <div className="relative flex flex-col justify-end h-full container max-w-7xl mx-auto px-4 z-10">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-          <div className="relative aspect-[2/3] w-[200px] rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546]">
-            <Image
-              src={`https://image.tmdb.org/t/p/w780${data.poster_path}`}
-              alt={data.title || data.name || 'Untitled'}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <div className="max-w-[100%] sm:max-w-[480px]">
-            <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg ">
-              {data.title || data.name}
-            </h1>
-            {data.tagline && (
-              <p className="mt-1 text-md md:text-base text-white line-clamp-4 drop-shadow-sm">
-                {data.tagline}
-              </p>
-            )}
-            <p className="mt-4 text-sm md:text-base text-white text-justify text-shadow-lg">
-              {data.overview}
-            </p>
-            {data.genres && (
-              <p className="text-lg md:text-xl mb-6 mt-4 font-bold text-green-50">
-                {data.genres.map((genre: { name: string }) => genre.name).join(", ")}
-              </p>
-            )}
-            <div className="inline-block text-xl bg-[#0b3546] text-[#3cd293] py-2 px-4 rounded-lg z-50 mb-2">
-              {data.vote_average.toString().slice(0, 3)}
+    <header className="absolute top-0 left-0 z-100 w-[100%] text-white ">
+      <div className="container max-w-7xl mx-auto h-16 px-4 sm:px-4 lg:px-4 flex justify-between items-center">
+        <div className="flex items-center gap-4 lg:gap-12 w-full">
+          {/* Logo */}
+          <Link href="/" className="" >
+            <div className="relative w-[160px] md:w-[180px] lg:w-[200px] h-[40px] md:h-[45px] lg:h-[50px]">
+              <Image
+                src="/logo.png"    
+                alt="Logo"
+                fill
+                priority              
+              />
             </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex space-x-6">
+            {navLinks.map((link) => (
+               <Link
+                  key={link.name}
+                  onClick={() => setIsOpen(false)}
+                  href={link.href}
+                  className={`text-white text-md font-bold border-b-2 border-transparent py-1 px-2 hover:border-b-[#3cd293] transition-all duration-300 ${
+                    // pathname === link.href ? "bg-[#0b3546] text-[#3cd293] border-[#3cd293]" : ""
+                    pathname === link.href ? "border-b-2 border-b-[#3cd293]" : ""
+                    }`}
+                >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          
+          <div className="header-search-profile flex justify-end items-center gap-4 flex-1">
+            <form className="max-w-md w-full "
+              onSubmit={(e) => {
+                e.preventDefault();
+                setQuery(searchQuery);
+                setSearchQuery("");
+              }}
+            >   
+                <div className="relative rounded-lg overflow-hidden border-[#3cd293] border-2 bg-[#0b3546] text-[#3cd293] flex items-center">
+                    <input 
+                      value={searchQuery} 
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      type="search" 
+                      id="default-search" 
+                      className="block w-full py-2 px-4 text-sm text-gray-200 border rounded-lg border-none outline-none " placeholder="Search Movies, Tv Series..." 
+                      required />
+                    <button type="submit" className="absolute top-[50%] right-[4px] translate-y-[-50%] px-2 w-auto h-[80%] bg-[#0f455c] text-[#3cd293] flex justify-center items-center rounded-md cursor-pointer hover:bg-[#3cd293] hover:text-[#0f455c] transition-all ease-in duration-300"><IoSearch className="inline-block text-sm "/></button>
+                </div>
+            </form>
+
+            <div className="relative hidden lg:flex items-center justify-center py-2 px-4 rounded-xl border-1 border-[#3cd293] bg-[#0f455c] text-[#3cd293] cursor-pointer hover:bg-[#3cd293] hover:text-[#0b3546] transition-colors duration-300 ease-in-out">
+              <div>
+                <p>Login</p>
+              </div>
+            </div>
+
+            
+            
           </div>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button className="lg:hidden z-100 text-[#3cd293] ml-2" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <RiCloseLine  className="text-3xl"/> : <RiMenu2Fill  className="text-2xl"/>}
+        </button>
+
       </div>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-[#051f2985] z-2" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#051f29] via-transparent to-[#051f29]/20 z-2" />
-    </div>
+      
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <nav className="lg:hidden bg-background absolute top-0 left-0 h-[100vh] w-[100vw] z-60 b px-4 flex flex-col gap-6 bg-[#0b3546]">
+          <div className="h-16 flex items-center">
+            <Link href="/" className=""  onClick={() => setIsOpen(!isOpen)}>
+            <div className="relative w-[160px] md:w-[180px] lg:w-[200px] h-[40px] md:h-[45px] lg:h-[50px]">
+              <Image
+                src="/logo.png"    
+                alt="Logo"
+                fill
+                priority              
+              />
+            </div>
+            </Link>
+
+          </div>
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name} 
+              onClick={() => setIsOpen(!isOpen)} 
+              href={link.href} 
+              className={` text-3xl font-bold ${
+                pathname === link.href ? "text-[#3cd293]" : ""
+                }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+      )}
+    </header>
   );
 }

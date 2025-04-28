@@ -9,7 +9,7 @@ export default async function Page({ params, searchParams }: { params: { id: str
 
   const mediaType = searchParams.type || 'movie';
 
-  const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${Number(id)}`, {
+  const res = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}`, {
     headers: {
       Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, // Replace with actual API key
     }
