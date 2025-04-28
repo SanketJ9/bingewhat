@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import { useLoading } from "../../context/loadingContext";
-import { start } from 'repl';
 
 
 interface MediaItem {
