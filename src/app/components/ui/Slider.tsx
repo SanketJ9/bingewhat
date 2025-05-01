@@ -52,7 +52,7 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
       >
         {movies.map((item) => (
           <SwiperSlide key={item.id}>
-            <Link href={`/${item.id}?type=${item.title ? 'item' : 'tv'}`}>
+            <Link href={`/${item.title ? 'movie' : 'tv'}/${item.id}`}>
             <div className="relative rounded-lg overflow-hidden shadow-md">
             <div className="swiper-image relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
                 <Image

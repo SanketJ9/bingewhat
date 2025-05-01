@@ -54,7 +54,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
     }
 
     fetchData();
-  }, [apiUrl, startLoading, stopLoading]);
+  }, [apiUrl]);
 
   return (
     <>

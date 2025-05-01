@@ -24,38 +24,68 @@ interface BannerProps {
 }
 
 // ✅ fetchTrendingMovies accepts string, not BannerProps
-async function fetchTrendingMovies(apiUrl: string): Promise<Movie[]> {
-  const res = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, 
-    },
-    cache: "no-store",
-  });
+// async function fetchTrendingMovies(apiUrl: string): Promise<Movie[]> {
+//   const res = await fetch(apiUrl, {
+//     headers: {
+//       Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, 
+//     },
+//     cache: "no-store",
+//   });
 
-  if (!res.ok) throw new Error("Failed to fetch movies");
+//   if (!res.ok) throw new Error("Failed to fetch movies");
 
-  const data = await res.json();
-  const shuffled = [...data.results].sort(() => 0.8 - Math.random());
-  return shuffled.slice(0, 8);
-}
+//   const data = await res.json();
+//   const shuffled = [...data.results].sort(() => 0.8 - Math.random());
+//   return shuffled.slice(0, 8);
+// }
 
 export default function Banner({ apiUrl }: BannerProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [activeMovie, setActiveMovie] = useState<Movie | null>(null);
   const { startLoading, stopLoading } = useLoading();
 
-  useEffect(() => {
-    startLoading();
-    fetchTrendingMovies(apiUrl) 
-      .then((res) => {
-        stopLoading();
-        setMovies(res);
-        setActiveMovie(res[0]);
-      })
-      .catch((error) => {
-        console.error("Error fetching movies:", error);
-      });
-  }, [apiUrl, startLoading, stopLoading]); 
+  // useEffect(() => {
+  //   startLoading();
+  //   fetchTrendingMovies(apiUrl) 
+  //     .then((res) => {
+  //       stopLoading();
+  //       setMovies(res);
+  //       setActiveMovie(res[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching movies:", error);
+  //     }).finally();
+  // }, [apiUrl}); 
+
+    useEffect(() => {
+      async function fetchTrendingMovies() {
+        try {
+          startLoading();
+          const res = await fetch(apiUrl, {
+            headers: {
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTZmZmQzYTYyMTU0OTZlNmZjOGEwNmJkZmJmMTU3ZiIsIm5iZiI6MTY0MDQ2MDI2My4wMDEsInN1YiI6IjYxYzc2ZmU2NmY1M2UxMDA0MmU5MDEyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oPqtu0UuHv_j73lG-V0r4fkQhFr2zxebobqLZwkCg4w`, 
+            },
+            cache: "no-store",
+          });
+        
+          if (!res.ok) throw new Error("Failed to fetch movies");
+        
+          const data = await res.json();
+          const shuffled = [...data.results].sort(() => 0.8 - Math.random());
+          
+          stopLoading();
+          setMovies(shuffled);
+          setActiveMovie(shuffled[0]);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          stopLoading();
+        }
+      }
+  
+      fetchTrendingMovies();
+    }, [apiUrl]);
+  
 
   return (
     <>
