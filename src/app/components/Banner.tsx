@@ -6,7 +6,6 @@ import Image from "next/image";
 import Button from "./ui/Button";
 import Slider from "./ui/Slider";
 import { getMovieGenreNames } from "../lib/tmdbs";
-
 import { useLoading } from "../context/loadingContext";
 
 
@@ -56,7 +55,7 @@ export default function Banner({ apiUrl }: BannerProps) {
       .catch((error) => {
         console.error("Error fetching movies:", error);
       });
-  }, [apiUrl]); 
+  }, [apiUrl, startLoading, stopLoading]); 
 
   return (
     <>

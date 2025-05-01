@@ -54,7 +54,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
     }
 
     fetchData();
-  }, [apiUrl]);
+  }, [apiUrl, startLoading, stopLoading]);
 
   return (
     <>
@@ -79,7 +79,7 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
             >
                 {mediaItems.map((item) => (
                 <SwiperSlide key={item.id}>
-                    <Link href={`/${item.id}?type=${item.title ? 'movie' : 'tv'}`}>
+                    <Link href={`/${item.title ? 'movie' : 'tv'}/${item.id}`}>
                     <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
                         <Image
                             src={item.poster_path ?`https://image.tmdb.org/t/p/w780${item.poster_path}` : "/no-poster.jpg"}

@@ -50,14 +50,14 @@ export default function Slider({ movies, onActiveChange }: SliderProps) {
           1024: { slidesPerView: 5 },
         }}
       >
-        {movies.map((movie) => (
-          <SwiperSlide key={movie.id}>
-            <Link href={`/${movie.id}?type=${movie.title ? 'movie' : 'tv'}`}>
+        {movies.map((item) => (
+          <SwiperSlide key={item.id}>
+            <Link href={`/${item.id}?type=${item.title ? 'item' : 'tv'}`}>
             <div className="relative rounded-lg overflow-hidden shadow-md">
             <div className="swiper-image relative aspect-[2/3] sm:aspect-[2/3]  w-full rounded-lg overflow-hidden shadow-md">
                 <Image
-                    src={movie.poster_path ?`https://image.tmdb.org/t/p/w780${movie.poster_path}` : "/no-poster.jpg"}
-                    alt={movie.title || movie.name || 'Untitled'}
+                    src={item.poster_path ?`https://image.tmdb.org/t/p/w780${item.poster_path}` : "/no-poster.jpg"}
+                    alt={item.title || item.name || 'Untitled'}
                     fill
                     className="object-cover"
                     priority

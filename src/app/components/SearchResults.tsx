@@ -77,8 +77,8 @@ export default function SearchResults() {
                 {result && (
                     result.map((item: Movie) => {
                     return (
-                        <Link key={item.id} href={`/${item.id}?type=${item.title ? 'movie' : 'tv'}`} onClick={() => setIsSearchOpen(false)}>
-                        <div  className='flex flex-row gap-4 sm:gap-8'>
+                        <div key={item.id} className='flex flex-row gap-4 sm:gap-8'>
+                            <Link href={`/${item.title ? 'movie' : 'tv'}/${item.id}`} onClick={() => setIsSearchOpen(false)}>
                             <div  className="relative aspect-[2/3] w-[120px] rounded-lg overflow-hidden shadow-md cursor-pointer border-1 mg:border-2 border-[#0b3546] hover:border-[#3cd293] transition-all duration-300 ease-in-out">
                                 <Image
                                 src={item.poster_path ?`https://image.tmdb.org/t/p/w780${item.poster_path}` : "/no-poster.jpg"}
@@ -113,8 +113,8 @@ export default function SearchResults() {
                                 
 
                             </div>
-                        </div>
                         </Link>
+                        </div>
                     );
                     })
                     
