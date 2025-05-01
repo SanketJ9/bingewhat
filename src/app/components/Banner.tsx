@@ -109,7 +109,7 @@ export default function Banner({ apiUrl }: BannerProps) {
               </p>
               {activeMovie.genre_ids && (
                 <p className="text-sm md:text-md mb-6 mt-4 font-bold text-green-50">
-                  {getMovieGenreNames(activeMovie.genre_ids).join(", ")}
+                  {getMovieGenreNames(activeMovie.genre_ids).join(" | ")}
                 </p>
               )}
               <Link href={`/${activeMovie.id}`}>

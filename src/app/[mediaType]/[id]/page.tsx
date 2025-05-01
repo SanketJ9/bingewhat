@@ -38,9 +38,9 @@ export default async function page({params}: {params: Promise<{ mediaType: strin
           priority
         />
 
-        <div className="relative flex flex-col justify-end h-full container max-w-7xl mx-auto px-4 z-10">
-          <div className="flex flex-row gap-4 md:gap-8">
-            <div className="relative aspect-[2/3] w-[200px] mb-8 rounded-lg overflow-hidden shadow-md cursor-pointer border border-[#0b3546] md:border-2">
+        <div className="relative flex flex-col  justify-end h-full container max-w-7xl mx-auto px-4 z-10">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-8">
+            <div className="relative aspect-[2/3] w-[200px] rounded-lg overflow-hidden shadow-md cursor-pointer border border-[#0b3546] md:border-2">
               <Image
                 src={`https://image.tmdb.org/t/p/w780${data.poster_path}`}
                 alt={data.title || data.name || 'Untitled'}
@@ -50,24 +50,24 @@ export default async function page({params}: {params: Promise<{ mediaType: strin
               />
             </div>
 
-            <div className="max-w-[85%] sm:max-w-[480px]">
+            <div className="max-w-[100%] sm:max-w-[480px]">
               <h1 className="text-3xl md:text-4xl font-bold drop-shadow-lg">
                 {data.title || data.name}
               </h1>
 
               {data.tagline && (
-                <p className="mt-1 text-md md:text-base text-white line-clamp-4 drop-shadow-sm">
+                <p className="mt-1  text-md md:text-base text-white line-clamp-4 drop-shadow-sm">
                   {data.tagline}
                 </p>
               )}
 
-              <p className="mt-4 text-sm md:text-base text-white drop-shadow-lg">
+              <p className="mt-4 text-justify text-sm md:text-base text-white drop-shadow-lg">
                 {data.overview}
               </p>
 
               {data.genres && (
-                <p className="text-lg md:text-xl mb-6 mt-4 font-bold text-green-50">
-                  {data.genres.map((genre: { name: string }) => genre.name).join(", ")}
+                <p className="text-md md:text-xl mb-6 mt-4 font-bold text-green-50">
+                  {data.genres.map((genre: { name: string }) => genre.name).join(" | ")}
                 </p>
               )}
 
