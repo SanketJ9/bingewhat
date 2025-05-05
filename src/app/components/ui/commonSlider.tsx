@@ -58,8 +58,8 @@ export default function CommonSlider({ heading,apiUrl}: CommonSliderProps) {
 
   return (
     <>
-        <h3 className="text-2xl font-bold ">{heading}</h3>
-        <div className="common-swiper w-full py-2 lg:py-3 xl:px-4">
+        <h3 className="text-2xl font-bold text-gray-50">{heading}</h3>
+        <div className="common-swiper w-full py-2 ">
             <Swiper
                 modules={[Navigation]}
                 spaceBetween={6}

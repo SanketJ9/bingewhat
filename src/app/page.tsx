@@ -4,6 +4,8 @@ import Banner from "./components/Banner";
 import Button from "./components/ui/Button";
 import CommonSlider from "./components/ui/commonSlider";
 
+
+
 export default function Home() {
   return (
     <>
