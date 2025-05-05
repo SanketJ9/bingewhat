@@ -122,7 +122,7 @@ export default function Banner({ apiUrl }: BannerProps) {
             </div>
           </div>
 
-          <div className="absolute top-0 left-0 w-full h-full bg-[#051f2954] z-2" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[#051f298c] z-2" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#051f29] via-transparent to-[#051f29]/20 z-2" />
         </div>
       )}

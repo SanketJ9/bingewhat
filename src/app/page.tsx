@@ -19,7 +19,7 @@ export default function Home() {
                 className="object-cover"
                 priority        
               />
-                <div className="absolute inset-0 bg-[#0b354692]" />
+                <div className="absolute inset-0 bg-[#0b3546e0]" />
             </div>
             <div className="w-[100%]  py-6 px-4 md:w-[60%] ">
               <h2 className="text-xl text-center md:text-left font-bold text-[#3cd293] ">Find Your Binge Before Your Food Gets Cold</h2>
