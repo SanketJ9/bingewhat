@@ -63,7 +63,7 @@ export default function SearchResults() {
         onClick={() => setIsSearchOpen(false)}
         className='absolute top-16 left-[50%] translate-x-[-50%] container max-w-7xl mx-auto h-[80vh] z-50 rounded-xl'
     >
-        <div ref={wrapperRef} className='mx-4 ml-auto p-4 bg-[#0b3546e8]  max-w-[90%] md:max-w-[720px] h-[100%] overflow-y-scroll rounded-2xl shadow-2xs'>
+        <div ref={wrapperRef} className='relative mx-4 ml-auto p-4 bg-[#0b3546e8]  max-w-[90%] md:max-w-[720px] h-[100%] overflow-y-scroll rounded-2xl '>
             {/* <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 '> */}
             <div className='flex flex-col justify-start gap-4'>
 
@@ -114,6 +114,7 @@ export default function SearchResults() {
             )}
 
             </div>
+
         </div>
 
     </div>
